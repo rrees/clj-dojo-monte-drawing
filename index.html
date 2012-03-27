@@ -2,15 +2,30 @@
 
 <html>
 	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="out/goog/base.js"></script>
 		<script src="hello.js"></script>
+		<script src="drawing.js"></script>
 		<script>
 			goog.require('hello');
+			goog.require('drawing');
 	    </script>
 		<script>
-			alert(hello.greet("ClojureScript"));
+		$(function() {
+			var picture = document.getElementById('drawing');
+			var ctx = picture.getContext('2d');
+			
+			function recur() {
+				drawing.draw(ctx);
+				window.setTimeout(recur, 1000)
+			}
+			recur();
+		});
+			
 		</script>
 	</head>
 	<body>
+		<canvas id="drawing" width="400" height="400">
+		</canvas>
 	</body>
 </html>
